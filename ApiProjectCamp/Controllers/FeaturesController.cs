@@ -27,10 +27,10 @@ namespace ApiProjectCamp.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetList()
+        public IActionResult GetList(int id)
         {
-            var feature = _context.Features.ToList();
-            return Ok(_mapper.Map<List<GetByIdFeatureDto>>(feature));
+            var feature = _context.Features.Find(id);
+            return Ok(_mapper.Map<GetByIdFeatureDto>(feature));
         }
 
         [HttpPost]
@@ -38,6 +38,7 @@ namespace ApiProjectCamp.Controllers
         {
             var feature = _mapper.Map<Feature>(cfdto);
             _context.Features.Add(feature);
+            _context.SaveChanges();
             return Ok("Ekleme işlemi başarılı.");
         }
 
@@ -46,6 +47,7 @@ namespace ApiProjectCamp.Controllers
         {
             var feature = _context.Features.Find(id);
             _context.Features.Remove(feature);
+            _context.SaveChanges();
             return Ok("Silme işlemi başarılı");
         }
 
@@ -54,6 +56,7 @@ namespace ApiProjectCamp.Controllers
         {
             var feature = _mapper.Map<Feature>(ufdto);
             _context.Features.Update(feature);
+            _context.SaveChanges();
             return Ok("Güncelleme işlemi başarılı.");
         }
     }
