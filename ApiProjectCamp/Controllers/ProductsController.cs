@@ -43,5 +43,37 @@ namespace ApiProjectCamp.Controllers
                 return Ok(new { Message = "Ürün ekleme işlemi başarılı.", data = product });
             }
         }
+
+        [HttpDelete]
+        public IActionResult DeleteProduct(int id)
+        {
+            var product = _context.Products.Find(id);
+            _context.Products.Remove(product);
+            _context.SaveChanges();
+            return Ok(new { Message = "Ürün silme işlemi başarılı.", data = product });
+        }
+
+        [HttpGet("GetProduct")]
+        public IActionResult GetProduct(int id)
+        {
+            var product = _context.Products.Find(id);
+            return Ok(product);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateProduct(Product product)
+        {
+            var validationResult = _validator.Validate(product);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors.Select(x => x.ErrorMessage));
+            }
+            else
+            {
+                _context.Products.Update(product);
+                _context.SaveChanges();
+                return Ok(new { Message = "Ürün güncelleme işlemi başarılı.", data = product });
+            }
+        }
     }
 }

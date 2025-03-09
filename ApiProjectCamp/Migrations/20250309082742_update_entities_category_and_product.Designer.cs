@@ -4,6 +4,7 @@ using ApiProjectCamp.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiProjectCamp.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    partial class ApiContextModelSnapshot : ModelSnapshot
+    [Migration("20250309082742_update_entities_category_and_product")]
+    partial class update_entities_category_and_product
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
