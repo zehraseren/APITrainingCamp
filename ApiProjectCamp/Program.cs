@@ -1,11 +1,15 @@
-using ApiProjectCamp.Context;
+using FluentValidation;
 using System.Reflection;
+using ApiProjectCamp.Context;
+using ApiProjectCamp.Entities;
+using ApiProjectCamp.ValidationRules;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddDbContext<ApiContext>();
+builder.Services.AddScoped<IValidator<Product>, ProductValidator>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddControllers();
