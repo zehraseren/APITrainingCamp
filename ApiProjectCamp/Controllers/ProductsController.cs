@@ -4,6 +4,7 @@ using ApiProjectCamp.Context;
 using ApiProjectCamp.Entities;
 using Microsoft.AspNetCore.Mvc;
 using ApiProjectCamp.Dtos.ProductDtos;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiProjectCamp.Controllers
 {
@@ -84,6 +85,13 @@ namespace ApiProjectCamp.Controllers
             _context.Products.Add(value);
             _context.SaveChanges();
             return Ok("Ürün ekleme işlemi başarılı.");
+        }
+
+        [HttpGet("ProductListWithCategory")]
+        public IActionResult ProductListWithCategory()
+        {
+            var value = _context.Products.Include(x => x.Category).ToList();
+            return Ok(_mapper.Map<List<ResultProductWithCategoryDto>>(value));
         }
     }
 }
