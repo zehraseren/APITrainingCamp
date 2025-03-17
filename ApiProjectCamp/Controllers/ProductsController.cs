@@ -3,6 +3,7 @@ using FluentValidation;
 using ApiProjectCamp.Context;
 using ApiProjectCamp.Entities;
 using Microsoft.AspNetCore.Mvc;
+using ApiProjectCamp.Dtos.ProductDtos;
 
 namespace ApiProjectCamp.Controllers
 {
@@ -74,6 +75,15 @@ namespace ApiProjectCamp.Controllers
                 _context.SaveChanges();
                 return Ok(new { Message = "Ürün güncelleme işlemi başarılı.", data = product });
             }
+        }
+
+        [HttpPost("CreateProductWithCategory")]
+        public IActionResult CreateProductWithCategory(CreateProductDto cpdto)
+        {
+            var value = _mapper.Map<Product>(cpdto);
+            _context.Products.Add(value);
+            _context.SaveChanges();
+            return Ok("Ürün ekleme işlemi başarılı.");
         }
     }
 }

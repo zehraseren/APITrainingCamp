@@ -2,6 +2,7 @@
 using ApiProjectCamp.Entities;
 using ApiProjectCamp.Dtos.FeatureDtos;
 using ApiProjectCamp.Dtos.MessageDtos;
+using ApiProjectCamp.Dtos.ProductDtos;
 
 namespace ApiProjectCamp.Mapping
 {
@@ -18,6 +19,8 @@ namespace ApiProjectCamp.Mapping
             CreateMap<Message, CreateMessageDto>().ReverseMap();
             CreateMap<Message, UpdateMessageDto>().ReverseMap();
             CreateMap<Message, GetByIdMessageDto>().ReverseMap();
+
+            CreateMap<Product, CreateProductDto>().ReverseMap();
         }
     }
 }
