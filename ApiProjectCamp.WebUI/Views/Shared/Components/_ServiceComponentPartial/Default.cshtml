@@ -1,4 +1,6 @@
-﻿<section id="why-us" class="why-us section light-background">
+﻿@model List<ResultServiceDto>
+
+<section id="why-us" class="why-us section light-background">
 
     <div class="container">
 
@@ -19,34 +21,18 @@
 
             <div class="col-lg-8 d-flex align-items-stretch">
                 <div class="row gy-4" data-aos="fade-up" data-aos-delay="200">
-
-                    <div class="col-xl-4">
-                        <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                            <i class="bi bi-clipboard-data"></i>
-                            <h4>Kalori mi dedin, chill bizde</h4>
-                            <p>Ne yediğini bil ama tadını da çıkar. Biz senin yerine analiz ettik zaten.</p>
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-xl-4">
+                            <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                                <i class="@item.IconUrl"></i>
+                                <h4>@item.Title</h4>
+                                <p>@item.Description</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                            <i class="bi bi-gem"></i>
-                            <h4>Gurme Tariflerle Sofrada Işıltı</h4>
-                            <p>Sıradanlıktan uzak, özenle seçilmiş tariflerle sofranı taçlandır.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                            <i class="bi bi-inboxes"></i>
-                            <h4>Kutudan Çıkan Lezzet Şoku</h4>
-                            <p>Netflix aç, battaniyeyi kap… Yummy kutun yolda! Isıttığın anda dizi maratonuna hazırsın.</p>
-                        </div>
-                    </div>
-
+                    }
                 </div>
             </div>
-
         </div>
 
     </div>

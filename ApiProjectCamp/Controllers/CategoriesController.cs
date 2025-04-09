@@ -51,7 +51,7 @@ namespace ApiProjectCamp.Controllers
         {
             _context.Categories.Update(category);
             _context.SaveChanges();
-            return Ok("Kategori güncellem işlemi başarılı.");
+            return Ok("Kategori güncelleme işlemi başarılı.");
         }
     }
 }
