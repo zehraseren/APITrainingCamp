@@ -1,8 +1,8 @@
 using FluentValidation;
 using System.Reflection;
-using ApiProjectCamp.Context;
-using ApiProjectCamp.Entities;
-using ApiProjectCamp.ValidationRules;
+using ApiProjectCamp.WebApi.Context;
+using ApiProjectCamp.WebApi.Entities;
+using ApiProjectCamp.WebApi.ValidationRules;
 
 var builder = WebApplication.CreateBuilder(args);
 

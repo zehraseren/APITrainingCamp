@@ -1,9 +1,8 @@
-﻿namespace ApiProjectCamp.Entities
+﻿namespace ApiProjectCamp.WebApi.Entities;
+
+public class Category
 {
-    public class Category
-    {
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public List<Product> Products { get; set; }
-    }
+    public int CategoryId { get; set; }
+    public string CategoryName { get; set; }
+    public List<Product> Products { get; set; }
 }

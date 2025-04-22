@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiProjectCamp", "ApiProjectCamp\ApiProjectCamp.csproj", "{4399309A-4429-49AB-B559-2491D2C7BCB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiProjectCamp.WebApi", "ApiProjectCamp\ApiProjectCamp.WebApi.csproj", "{4399309A-4429-49AB-B559-2491D2C7BCB1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiProjectCamp.WebUI", "ApiProjectCamp.WebUI\ApiProjectCamp.WebUI.csproj", "{BD547F5C-5AFB-4BA2-87D9-F30F05EA1841}"
 EndProject

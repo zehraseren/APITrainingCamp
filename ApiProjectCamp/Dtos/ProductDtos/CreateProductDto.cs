@@ -1,4 +1,4 @@
-﻿namespace ApiProjectCamp.Dtos.ProductDtos;
+﻿namespace ApiProjectCamp.WebApi.Dtos.ProductDtos;
 
 public class CreateProductDto
 {

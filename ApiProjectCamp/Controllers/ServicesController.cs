@@ -1,8 +1,8 @@
-﻿using ApiProjectCamp.Context;
-using ApiProjectCamp.Entities;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using ApiProjectCamp.WebApi.Context;
+using ApiProjectCamp.WebApi.Entities;
 
-namespace ApiProjectCamp.Controllers;
+namespace ApiProjectCamp.WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
