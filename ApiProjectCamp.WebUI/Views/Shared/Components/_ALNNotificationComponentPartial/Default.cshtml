@@ -1,4 +1,20 @@
-﻿@model List<ResultNotificationDto>
+﻿@model List<ResultNotificationByIsReadFalseDto>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const colors = ['bg-primary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-secondary'];
+        const elements = document.querySelectorAll('.notifColor');
+
+        elements.forEach(el => {
+            // Var olan bg-* sınıflarını temizler
+            colors.forEach(c => el.classList.remove(c));
+
+            // Rastgele renk seçer ve ekler
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            el.classList.add(randomColor);
+        });
+    });
+</script>
 
 <li class="dropdown dropdown-list-toggle">
     <a href="#" data-toggle="dropdown"
@@ -13,32 +29,20 @@
             </div>
         </div>
         <div class="dropdown-list-content dropdown-list-icons">
-            <a href="#" class="dropdown-item dropdown-item-unread">
-                <span class="dropdown-item-icon bg-primary text-white">
-                    <i class="fas
-            fa-code"></i>
-                </span> <span class="dropdown-item-desc">
-                    Template update is available now!
-                    <span class="time">2 Min Ago</span>
-                </span>
-            </a>
-            <a href="#" class="dropdown-item">
-                <span class="dropdown-item-icon bg-info text-white">
-                    <i class="far
-            fa-user"></i>
-                </span> <span class="dropdown-item-desc">
-                    <b>You</b> and <b>
-                        Dedik
-                        Sugiharto
-                    </b> are now friends <span class="time">
-                        10 Hours
-                        Ago
+            @foreach (var item in Model)
+            {
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                    <span class="dropdown-item-icon notifColor text-white">
+                        <i class="@item.IconUrl"></i>
+                    </span> <span class="dropdown-item-desc">
+                        @item.Description
+                        <span class="time">@item.NotificationDate.ToString("dd/MM/yyyy HH:mm")</span>
                     </span>
-                </span>
-            </a>
+                </a>
+            }
         </div>
         <div class="dropdown-footer text-center">
-            <a href="#">Hepsini Gör <i class="fas fa-chevron-right"></i></a>
+            <a href="/Notification/NotificationList/">Hepsini Gör <i class="fas fa-chevron-right"></i></a>
         </div>
     </div>
 </li>

@@ -16,11 +16,11 @@ public class _ALNNotificationComponentPartial : ViewComponent
     public async Task<IViewComponentResult> InvokeAsync()
     {
         var client = _httpClientFactory.CreateClient();
-        var response = await client.GetAsync("https://localhost:44392/api/Notifications");
+        var response = await client.GetAsync("https://localhost:44392/api/Notifications/NotificationListByIsReadFalse");
         if (response.IsSuccessStatusCode)
         {
             var data = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<List<ResultNotificationDto>>(data);
+            var result = JsonConvert.DeserializeObject<List<ResultNotificationByIsReadFalseDto>>(data);
             return View(result);
         }
         return View();

@@ -69,4 +69,11 @@ public class NotificationsController : ControllerBase
         _context.SaveChanges();
         return Ok("Güncelleme işlemi başarılı.");
     }
+
+    [HttpGet("NotificationListByIsReadFalse")]
+    public IActionResult NotificationListByIsReadFalse()
+    {
+        var unreadNotifications = _context.Notifications.Where(x => x.IsRead == false).ToList();
+        return Ok(unreadNotifications);
+    }
 }
