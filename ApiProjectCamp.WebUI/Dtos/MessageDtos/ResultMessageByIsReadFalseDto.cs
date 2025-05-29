@@ -1,6 +1,6 @@
-﻿namespace ApiProjectCamp.WebApi.Entities;
+﻿namespace ApiProjectCamp.WebUI.Dtos.MessageDtos;
 
-public class Message
+public class ResultMessageByIsReadFalseDto
 {
     public int MessageId { get; set; }
     public string NameSurname { get; set; }
