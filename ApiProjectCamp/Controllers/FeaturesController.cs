@@ -27,7 +27,7 @@ public class FeaturesController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetList(int id)
+    public IActionResult GetFeature(int id)
     {
         var feature = _context.Features.Find(id);
         return Ok(_mapper.Map<GetByIdFeatureDto>(feature));

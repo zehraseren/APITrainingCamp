@@ -1,7 +1,7 @@
-﻿@model CreateCategoryDto
+﻿@model UpdateCategoryDto
 
 @{
-    ViewData["Title"] = "CreateCategory";
+    ViewData["Title"] = "UpdateCategory";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
@@ -11,15 +11,16 @@
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Kategori Ekleme Sayfası</h4>
+                        <h4>Kategori Güncelleme Sayfası</h4>
                     </div>
                     <div class="card-body">
                         <form method="post">
+                            <input type="hidden" asp-for="CategoryId" />
                             <label>Kategori Adı</label>
-                            <input type="text" class="form-control" asp-for="CategoryName"/>
+                            <input type="text" class="form-control" asp-for="CategoryName" />
                             <div class="d-flex justify-content-end mt-4 none-border">
-                                <button type="submit" class="btn btn-outline-success mr-3 btn-rounded">Ekle</button>
-                                <a href="/Category/CategoryList/" class="btn btn-outline-danger btn-rounded mr-2">Vazgeç</a>
+                                <button type="submit" class="btn btn-outline-success mr-3 btn-rounded">Güncelle</button>
+                                <a href="/Category/CategoryList/" class="btn btn-outline-danger btn-rounded mr-2">İptal</a>
                             </div>
                         </form>
                     </div>

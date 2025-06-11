@@ -3,6 +3,7 @@ using ApiProjectCamp.WebApi.Entities;
 using ApiProjectCamp.WebApi.Dtos.FeatureDtos;
 using ApiProjectCamp.WebApi.Dtos.MessageDtos;
 using ApiProjectCamp.WebApi.Dtos.ProductDtos;
+using ApiProjectCamp.WebApi.Dtos.CategoryDtos;
 using ApiProjectCamp.WebApi.Dtos.NotificationDtos;
 
 namespace ApiProjectCamp.Mapping;
@@ -28,5 +29,10 @@ public class GeneralMapping : Profile
         CreateMap<Notification, CreateNotificationDto>().ReverseMap();
         CreateMap<Notification, UpdateNotificationDto>().ReverseMap();
         CreateMap<Notification, GetByIdNotificationDto>().ReverseMap();
+
+        CreateMap<Category, ResultCategoryDto>().ReverseMap();
+        CreateMap<Category, CreateCategoryDto>().ReverseMap();
+        CreateMap<Category, UpdateCategoryDto>().ReverseMap();
+        CreateMap<Category, GetByIdCategoryDto>().ReverseMap();
     }
 }

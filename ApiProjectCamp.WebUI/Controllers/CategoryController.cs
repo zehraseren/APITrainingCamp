@@ -46,4 +46,43 @@ public class CategoryController : Controller
         }
         return View();
     }
+
+    public async Task<IActionResult> DeleteCategory(int id)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var response = await client.DeleteAsync($"https://localhost:44392/api/Categories/{id}");
+        if (response.IsSuccessStatusCode)
+        {
+            return RedirectToAction("CategoryList");
+        }
+        return View();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> UpdateCategory(int id)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var response = await client.GetAsync($"https://localhost:44392/api/Categories/{id}");
+        if (response.IsSuccessStatusCode)
+        {
+            var data = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<UpdateCategoryDto>(data);
+            return View(result);
+        }
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateCategory(UpdateCategoryDto ucdto)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var data = JsonConvert.SerializeObject(ucdto);
+        StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+        var response = await client.PutAsync($"https://localhost:44392/api/Categories/", content);
+        if (response.IsSuccessStatusCode)
+        {
+            return RedirectToAction("CategoryList");
+        }
+        return View();
+    }
 }
