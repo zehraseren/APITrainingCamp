@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ApiProjectCamp.WebApi.Entities;
+using ApiProjectCamp.WebApi.Dtos.AboutDtos;
 using ApiProjectCamp.WebApi.Dtos.FeatureDtos;
 using ApiProjectCamp.WebApi.Dtos.MessageDtos;
 using ApiProjectCamp.WebApi.Dtos.ProductDtos;
@@ -35,5 +36,10 @@ public class GeneralMapping : Profile
         CreateMap<Category, CreateCategoryDto>().ReverseMap();
         CreateMap<Category, UpdateCategoryDto>().ReverseMap();
         CreateMap<Category, GetByIdCategoryDto>().ReverseMap();
+
+        CreateMap<About, CreateAboutDto>().ReverseMap();
+        CreateMap<About, UpdateAboutDto>().ReverseMap();
+        CreateMap<About, ResultAboutDto>().ReverseMap();
+        CreateMap<About, GetByIdAboutDto>().ReverseMap();
     }
 }

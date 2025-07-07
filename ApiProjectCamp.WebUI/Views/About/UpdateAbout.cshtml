@@ -1,0 +1,41 @@
+﻿@model UpdateAboutDto
+
+@{
+    ViewData["Title"] = "UpdateAbout";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Hakkımızda Güncelleme Sayfası</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <input type="hidden" asp-for="AboutId" />
+                            <label>Başlık</label>
+                            <input type="text" class="form-control" asp-for="Title" />
+                            <label>Rezervasyon Numarası</label>
+                            <input type="text" class="form-control" asp-for="ReservationNumber" />
+                            <label>Görsel URL</label>
+                            <input type="text" class="form-control" asp-for="ImageUrl" />
+                            <label>Video Kapak Görseli</label>
+                            <input type="text" class="form-control" asp-for="VideoImageUrl" />
+                            <label>Video URL (Embed Olarak)</label>
+                            <input type="text" class="form-control" asp-for="VideoCoverImageUrl" />
+                            <label>Başlık</label>
+                            <textarea class="form-control" role="8" asp-for="Description"></textarea>
+                            <div class="d-flex justify-content-end mt-4 none-border">
+                                <button type="submit" class="btn btn-outline-success mr-3 btn-rounded">Güncelle</button>
+                                <a href="/About/AboutList/" class="btn btn-outline-danger btn-rounded mr-2">İptal</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

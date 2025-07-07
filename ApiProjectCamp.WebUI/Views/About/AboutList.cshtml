@@ -1,7 +1,7 @@
-﻿@model List<ResultFeatureDto>
+﻿@model List<ResultAboutDto>
 
 @{
-    ViewData["Title"] = "FeatureList";
+    ViewData["Title"] = "AboutList";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
@@ -11,16 +11,17 @@
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Kategori Listesi</h4>
+                        <h4>Hakkımızda Listesi</h4>
                     </div>
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">Başlık</th>
-                                    <th scope="col">Alt Başlık</th>
-                                    <th scope="col">Video URL</th>
+                                    <th scope="col">Reservasyon Numarası</th>
                                     <th scope="col">Görsel URL</th>
+                                    <th scope="col">Video Kapak Görseli</th>
+                                    <th scope="col">Video URL</th>
                                     <th scope="col">Açıklama</th>
                                     <th scope="col">Sil</th>
                                     <th scope="col">Güncelle</th>
@@ -31,12 +32,13 @@
                                 {
                                     <tr>
                                         <td>@item.Title</td>
-                                        <td>@item.Subtitle</td>
-                                        <td>@item.VideoUrl</td>
+                                        <td>@item.ReservationNumber</td>
                                         <td>@item.ImageUrl</td>
+                                        <td>@item.VideoImageUrl</td>
+                                        <td>@item.VideoCoverImageUrl</td>
                                         <td>@item.Description</td>
-                                        <td><a href="/Feature/DeleteFeature/@item.FeatureId" class="btn btn-outline-danger btn-rounded">Sil</a></td>
-                                        <td><a href="/Feature/UpdateFeature/@item.FeatureId" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
+                                        <td><a href="/About/DeleteAbout/@item.AboutId" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+                                        <td><a href="/About/UpdateAbout/@item.AboutId" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
                                     </tr>
                                 }
                             </tbody>
@@ -44,11 +46,11 @@
                         <div class="d-flex justify-content-end mt-4 none-border">
                             @if (Model.Count == 1)
                             {
-                                <a href="#" class="btn btn-outline-primary btn-rounded mr-2" onclick="return false;">Öne Çıkan Mevcut</a>
+                                <a href="#" class="btn btn-outline-primary btn-rounded mr-2" onclick="return false;">Hakkımızda Bilgisi Mevcut</a>
                             }
                             else
                             {
-                                <a href="/Feature/CreateFeature/" class="btn btn-outline-primary btn-rounded mr-2">Yeni Öne Çıkan Girişi</a>
+                                <a href="/About/CreateAbout/" class="btn btn-outline-primary btn-rounded mr-2">Yeni Hakkımızda Bilgisi Girişi</a>
                             }
                         </div>
                     </div>
