@@ -46,7 +46,14 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-end mt-4 none-border">
-                            <a href="/Feature/CreateFeature/" class="btn btn-outline-primary btn-rounded mr-2">Yeni Öne Çıkan Girişi</a>
+                            @if (Model.Count == 1)
+                            {
+                                <a href="#" class="btn btn-outline-primary btn-rounded mr-2" onclick="return false;">Öne Çıkan Mevcut</a>
+                            }
+                            else
+                            {
+                                <a href="/Feature/CreateFeature/" class="btn btn-outline-primary btn-rounded mr-2">Yeni Öne Çıkan Girişi</a>
+                            }
                         </div>
                     </div>
                 </div>
