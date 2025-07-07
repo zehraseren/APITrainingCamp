@@ -19,7 +19,7 @@ public class ProductController : Controller
     public async Task<IActionResult> ProductList()
     {
         var client = _httpClientFactory.CreateClient();
-        var response = await client.GetAsync("https://localhost:44392/api/ProductListWithCategory");
+        var response = await client.GetAsync("https://localhost:44392/api/Products/ProductListWithCategory");
         if (response.IsSuccessStatusCode)
         {
             var data = await response.Content.ReadAsStringAsync();
@@ -54,7 +54,7 @@ public class ProductController : Controller
         var client = _httpClientFactory.CreateClient();
         var data = JsonConvert.SerializeObject(ccdto);
         StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-        var response = await client.PostAsync("https://localhost:44392/api/CreateProductWithCategory", content);
+        var response = await client.PostAsync("https://localhost:44392/api/Products/CreateProductWithCategory", content);
         if (response.IsSuccessStatusCode)
         {
             return RedirectToAction("ProductList");
@@ -65,7 +65,7 @@ public class ProductController : Controller
     public async Task<IActionResult> DeleteProduct(int id)
     {
         var client = _httpClientFactory.CreateClient();
-        var response = await client.DeleteAsync($"https://localhost:44392/api/Products/{id}");
+        var response = await client.DeleteAsync($"https://localhost:44392/api/Products?id={id}");
         if (response.IsSuccessStatusCode)
         {
             return RedirectToAction("ProductList");
@@ -77,7 +77,7 @@ public class ProductController : Controller
     public async Task<IActionResult> UpdateProduct(int id)
     {
         var client = _httpClientFactory.CreateClient();
-        var response = await client.GetAsync($"https://localhost:44392/api/Products/{id}");
+        var response = await client.GetAsync($"https://localhost:44392/api/Products/GetProduct?id={id}");
         if (response.IsSuccessStatusCode)
         {
             var data = await response.Content.ReadAsStringAsync();
@@ -93,7 +93,7 @@ public class ProductController : Controller
         var client = _httpClientFactory.CreateClient();
         var data = JsonConvert.SerializeObject(ucdto);
         StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-        var response = await client.PutAsync($"https://localhost:44392/api/Products/", content);
+        var response = await client.PutAsync($"https://localhost:44392/api/Products/CreateProductWithCategory", content);
         if (response.IsSuccessStatusCode)
         {
             return RedirectToAction("ProductList");

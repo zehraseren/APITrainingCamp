@@ -19,7 +19,9 @@
                             <label>Ürün Adı</label>
                             <input type="text" class="form-control" asp-for="ProductName" />
                             <label>Kategori</label>
-                            @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.category, new { @class = "form-control" })
+                            <select asp-for="CategoryId" class="form-control" asp-items="(IEnumerable<SelectListItem>)ViewBag.category">
+                                <option value="">Kategori Seçiniz</option>
+                            </select>
                             <label>Fiyat</label>
                             <input type="number" class="form-control" asp-for="Price" />
                             <label>Görsel URL</label>
