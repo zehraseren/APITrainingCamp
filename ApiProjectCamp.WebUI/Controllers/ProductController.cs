@@ -29,30 +29,41 @@ public class ProductController : Controller
         return View();
     }
 
-    [HttpGet]
-    public async Task<IActionResult> CreateProduct()
+    private async Task LoadCategories()
     {
         var client = _httpClientFactory.CreateClient();
         var response = await client.GetAsync("https://localhost:44392/api/Categories");
         var data = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(data);
-        List<SelectListItem> category = (from x in result
-                                         select new SelectListItem
-                                         {
-                                             Text = x.CategoryName,
-                                             Value = x.CategoryId.ToString()
-                                         }).ToList();
+        if (response.IsSuccessStatusCode)
+        {
+            var dataC = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(dataC);
+            List<SelectListItem> category = (from x in result
+                                             select new SelectListItem
+                                             {
+                                                 Text = x.CategoryName,
+                                                 Value = x.CategoryId.ToString()
+                                             }).ToList();
+            ViewBag.category = category;
+        }
+        else
+        {
+            ViewBag.category = new List<SelectListItem>();
+        }
+    }
 
-        ViewBag.category = category;
-
+    [HttpGet]
+    public async Task<IActionResult> CreateProduct()
+    {
+        await LoadCategories();
         return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateProduct(CreateProductDto ccdto)
+    public async Task<IActionResult> CreateProduct(CreateProductDto cpdto)
     {
         var client = _httpClientFactory.CreateClient();
-        var data = JsonConvert.SerializeObject(ccdto);
+        var data = JsonConvert.SerializeObject(cpdto);
         StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
         var response = await client.PostAsync("https://localhost:44392/api/Products/CreateProductWithCategory", content);
         if (response.IsSuccessStatusCode)
@@ -76,6 +87,8 @@ public class ProductController : Controller
     [HttpGet]
     public async Task<IActionResult> UpdateProduct(int id)
     {
+        await LoadCategories();
+
         var client = _httpClientFactory.CreateClient();
         var response = await client.GetAsync($"https://localhost:44392/api/Products/GetProduct?id={id}");
         if (response.IsSuccessStatusCode)
@@ -88,16 +101,23 @@ public class ProductController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> UpdateProduct(UpdateProductDto ucdto)
+    public async Task<IActionResult> UpdateProduct(UpdateProductDto updto)
     {
+        if (!ModelState.IsValid)
+        {
+            await LoadCategories();
+            return View(updto);
+        }
+
         var client = _httpClientFactory.CreateClient();
-        var data = JsonConvert.SerializeObject(ucdto);
+        var data = JsonConvert.SerializeObject(updto);
         StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-        var response = await client.PutAsync($"https://localhost:44392/api/Products/CreateProductWithCategory", content);
+        var response = await client.PutAsync($"https://localhost:44392/api/Products/UpdateProductWithCategory", content);
         if (response.IsSuccessStatusCode)
         {
             return RedirectToAction("ProductList");
         }
-        return View();
+        await LoadCategories();
+        return View(updto);
     }
 }

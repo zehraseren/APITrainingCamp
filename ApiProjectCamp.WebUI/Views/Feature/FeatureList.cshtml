@@ -1,7 +1,7 @@
-﻿@model List<ResultProductDto>
+﻿@model List<ResultFeatureDto>
 
 @{
-    ViewData["Title"] = "ProductList";
+    ViewData["Title"] = "FeatureList";
     Layout = "~/Views/AdminLayout/Index.cshtml";
     int count = 0;
 }
@@ -12,18 +12,18 @@
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Ürün Listesi</h4>
+                        <h4>Kategori Listesi</h4>
                     </div>
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Ürün Adı</th>
-                                    <th scope="col">Kategori</th>
-                                    <th scope="col">Fiyat</th>
+                                    <th scope="col">Başlık</th>
+                                    <th scope="col">Alt Başlık</th>
+                                    <th scope="col">Video URL</th>
                                     <th scope="col">Görsel URL</th>
-                                    <th scope="col">Ürün Detayı</th>
+                                    <th scope="col">Açıklama</th>
                                     <th scope="col">Sil</th>
                                     <th scope="col">Güncelle</th>
                                 </tr>
@@ -34,19 +34,19 @@
                                     count++;
                                     <tr>
                                         <th scope="row">@count</th>
-                                        <td>@item.ProductName</td>
-                                        <td>@item.CategoryName</td>
-                                        <td>@item.Price</td>
+                                        <td>@item.Title</td>
+                                        <td>@item.Subtitle</td>
+                                        <td>@item.VideoUrl</td>
                                         <td>@item.ImageUrl</td>
-                                        <td>@item.ProductDescription</td>
-                                        <td><a href="/Product/DeleteProduct/@item.ProductId" class="btn btn-outline-danger btn-rounded">Sil</a></td>
-                                        <td><a href="/Product/UpdateProduct/@item.ProductId" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
+                                        <td>@item.Description</td>
+                                        <td><a href="/Feature/DeleteFeature/@item.FeatureId" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+                                        <td><a href="/Feature/UpdateFeature/@item.FeatureId" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-end mt-4 none-border">
-                            <a href="/Product/CreateProduct/" class="btn btn-outline-primary btn-rounded mr-2">Yeni Ürün Girişi</a>
+                            <a href="/Feature/CreateFeature/" class="btn btn-outline-primary btn-rounded mr-2">Yeni Öne Çıkan Girişi</a>
                         </div>
                     </div>
                 </div>

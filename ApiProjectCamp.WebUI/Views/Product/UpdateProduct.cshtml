@@ -14,7 +14,7 @@
                         <h4>Ürün Güncelleme Sayfası</h4>
                     </div>
                     <div class="card-body">
-                        <form method="post">
+                        <form method="post" onsubmit="console.log('Form submitted');">
                             <input type="hidden" asp-for="ProductId" />
                             <label>Ürün Adı</label>
                             <input type="text" class="form-control" asp-for="ProductName" />

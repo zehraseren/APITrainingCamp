@@ -1,6 +1,6 @@
-﻿namespace ApiProjectCamp.WebUI.Dtos.ProductDtos;
+﻿namespace ApiProjectCamp.WebApi.Dtos.ProductDtos;
 
-public class ResultProductDto
+public class UpdateProductDto
 {
     public int ProductId { get; set; }
     public string ProductName { get; set; }
@@ -8,5 +8,4 @@ public class ResultProductDto
     public decimal Price { get; set; }
     public string ImageUrl { get; set; }
     public int CategoryId { get; set; }
-    public string CategoryName { get; set; }
 }

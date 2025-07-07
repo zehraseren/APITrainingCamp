@@ -87,6 +87,15 @@ public class ProductsController : ControllerBase
         return Ok("Ürün ekleme işlemi başarılı.");
     }
 
+    [HttpPut("UpdateProductWithCategory")]
+    public IActionResult UpdateProductWithCategory(UpdateProductDto updto)
+    {
+        var value = _mapper.Map<Product>(updto);
+        _context.Products.Update(value);
+        _context.SaveChanges();
+        return Ok("Ürün güncelleme işlemi başarılı.");
+    }
+
     [HttpGet("ProductListWithCategory")]
     public IActionResult ProductListWithCategory()
     {
