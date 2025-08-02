@@ -30,6 +30,7 @@ public class ContactsController : Controller
         {
             MapLocation = ccdto.MapLocation,
             Address = ccdto.Address,
+            Email = ccdto.Email,
             PhoneNumber = ccdto.PhoneNumber,
             OpenHours = ccdto.OpenHours
         };
@@ -38,7 +39,7 @@ public class ContactsController : Controller
         return Ok("Ekleme işlemi başarılı.");
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public IActionResult DeleteContact(int id)
     {
         var contact = _context.Contacts.Find(id);
@@ -62,6 +63,7 @@ public class ContactsController : Controller
             ContactId = ucdto.ContactId,
             MapLocation = ucdto.MapLocation,
             Address = ucdto.Address,
+            Email = ucdto.Email,
             PhoneNumber = ucdto.PhoneNumber,
             OpenHours = ucdto.OpenHours,
         };

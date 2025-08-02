@@ -1,6 +1,6 @@
-﻿namespace ApiProjectCamp.WebApi.Dtos.ContactDtos;
+﻿namespace ApiProjectCamp.WebUI.Dtos.ContactDtos;
 
-public class UpdateContactDto
+public class ResultContactDto
 {
     public int ContactId { get; set; }
     public string MapLocation { get; set; }
