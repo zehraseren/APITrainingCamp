@@ -1,10 +1,9 @@
 ﻿using ApiProjectCamp.Shared.Enums;
 
-namespace ApiProjectCamp.WebApi.Entities;
+namespace ApiProjectCamp.WebUI.Dtos.YummyEventDtos;
 
-public class YummyEvent
+public class CreateYummyEventDto
 {
-    public int YummyEventId { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public string ImageUrl { get; set; }

@@ -1,8 +1,8 @@
 ﻿using ApiProjectCamp.Shared.Enums;
 
-namespace ApiProjectCamp.WebApi.Entities;
+namespace ApiProjectCamp.WebUI.Dtos.YummyEventDtos;
 
-public class YummyEvent
+public class UpdateYummyEventDto
 {
     public int YummyEventId { get; set; }
     public string Title { get; set; }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiProjectCamp.WebApi", "Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiProjectCamp.WebUI", "ApiProjectCamp.WebUI\ApiProjectCamp.WebUI.csproj", "{BD547F5C-5AFB-4BA2-87D9-F30F05EA1841}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiProjectCamp.Shared", "ApiProjectCamp.Shared\ApiProjectCamp.Shared.csproj", "{B9C97161-E627-49CE-9BC6-8BEA01C2568B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BD547F5C-5AFB-4BA2-87D9-F30F05EA1841}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD547F5C-5AFB-4BA2-87D9-F30F05EA1841}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD547F5C-5AFB-4BA2-87D9-F30F05EA1841}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9C97161-E627-49CE-9BC6-8BEA01C2568B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9C97161-E627-49CE-9BC6-8BEA01C2568B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9C97161-E627-49CE-9BC6-8BEA01C2568B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9C97161-E627-49CE-9BC6-8BEA01C2568B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

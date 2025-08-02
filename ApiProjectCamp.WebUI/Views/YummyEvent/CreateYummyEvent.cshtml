@@ -1,0 +1,41 @@
+﻿@using ApiProjectCamp.Shared.Enums
+@model CreateYummyEventDto
+
+@{
+    ViewData["Title"] = "CreateYummyEvent";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Etkinlik Organizasyon Ekleme Sayfası</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <label>Başlık</label>
+                            <input type="text" class="form-control" asp-for="Title" />
+                            <label>Durum</label>
+                            <select asp-for="Status" asp-items="Html.GetEnumSelectList<StatusType>()" class="form-control">
+                                <option value="">Seçiniz</option>
+                            </select>
+                            <label>Görsel URL</label>
+                            <input type="text" class="form-control" asp-for="ImageUrl" />
+                            <label>Fiyat</label>
+                            <input type="number" class="form-control" asp-for="Price" />
+                            <label>Açıklama</label>
+                            <textarea class="form-control" rows="5" asp-for="Description"></textarea>
+                            <div class="d-flex justify-content-end mt-4 none-border">
+                                <button type="submit" class="btn btn-outline-success mr-3 btn-rounded">Kaydet</button>
+                                <a href="/YummyEvent/YummyEventList/" class="btn btn-outline-danger btn-rounded mr-2">İptal</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
