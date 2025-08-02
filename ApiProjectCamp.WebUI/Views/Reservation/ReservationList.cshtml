@@ -1,0 +1,61 @@
+﻿@model List<ResultReservationDto>
+
+@{
+    ViewData["Title"] = "ReservationList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Rezervasyon Listesi</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Durum</th>
+                                    <th scope="col">Ad Soyad</th>
+                                    <th scope="col">Telefon Numarası</th>
+                                    <th scope="col">Tarih | Saat</th>
+                                    <th scope="col">Kişi</th>
+                                    <th scope="col">Mesaj</th>
+                                    <th scope="col">Sil</th>
+                                    <th scope="col">Güncelle</th>
+                                    <th scope="col">Onayla</th>
+                                    <th scope="col">İptal Et</th>
+                                    <th scope="col">Beklet</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <th scope="row">@count</th>
+                                        <td>@item.ReservationStatus.ToString()</td>
+                                        <td>@item.NameSurname</td>
+                                        <td>@item.PhoneNumber</td>
+                                        <td>@item.ReservationDate.ToString("dd.MM.yyyy") | @item.ReservationHour.ToString(@"hh\:mm")</td>
+                                        <td>@item.PersonCount</td>
+                                        <td>@(item.Message.Length > 90 ? item.Message.Substring(0, 90) + "..." : item.Message)</td>
+                                        <td><a href="/Reservation/DeleteReservation/@item.ReservationId" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+                                        <td><a href="/Reservation/UpdateReservation/@item.ReservationId" class="btn btn-outline-primary btn-rounded">Güncelle</a></td>
+                                        <td><a href="/Reservation/ApprovedReservation/@item.ReservationId" class="btn btn-outline-success btn-rounded">Onayla</a></td>
+                                        <td><a href="/Reservation/PendingReservation/@item.ReservationId" class="btn btn-outline-warning btn-rounded">Beklet</a></td>
+                                        <td><a href="/Reservation/RejectedReservation/@item.ReservationId" class="btn btn-outline-secondary btn-rounded">Reddet</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

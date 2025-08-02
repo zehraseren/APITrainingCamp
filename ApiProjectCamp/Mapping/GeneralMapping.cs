@@ -5,6 +5,7 @@ using ApiProjectCamp.WebApi.Dtos.FeatureDtos;
 using ApiProjectCamp.WebApi.Dtos.MessageDtos;
 using ApiProjectCamp.WebApi.Dtos.ProductDtos;
 using ApiProjectCamp.WebApi.Dtos.CategoryDtos;
+using ApiProjectCamp.WebApi.Dtos.ReservationDtos;
 using ApiProjectCamp.WebApi.Dtos.NotificationDtos;
 
 namespace ApiProjectCamp.Mapping;
@@ -41,5 +42,10 @@ public class GeneralMapping : Profile
         CreateMap<About, UpdateAboutDto>().ReverseMap();
         CreateMap<About, ResultAboutDto>().ReverseMap();
         CreateMap<About, GetByIdAboutDto>().ReverseMap();
+
+        CreateMap<Reservation, CreateReservationDto>().ReverseMap();
+        CreateMap<Reservation, UpdateReservationDto>().ReverseMap();
+        CreateMap<Reservation, ResultReservationDto>().ReverseMap();
+        CreateMap<Reservation, GetByIdReservationDto>().ReverseMap();
     }
 }

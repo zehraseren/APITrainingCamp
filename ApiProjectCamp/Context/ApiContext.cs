@@ -34,6 +34,14 @@ public class ApiContext : DbContext
             .Property(p => p.Price)
             .HasColumnType("decimal(18,2)");
 
+        modelBuilder.Entity<Reservation>()
+            .Property(r => r.ReservationDate)
+            .HasColumnType("date");
+
+        modelBuilder.Entity<Reservation>()
+            .Property(r => r.ReservationHour)
+            .HasColumnType("time");
+
         base.OnModelCreating(modelBuilder);
     }
 }

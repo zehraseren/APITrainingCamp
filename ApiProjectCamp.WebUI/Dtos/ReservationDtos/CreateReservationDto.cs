@@ -1,10 +1,9 @@
 ﻿using ApiProjectCamp.Shared.Enums;
 
-namespace ApiProjectCamp.WebApi.Entities;
+namespace ApiProjectCamp.WebUI.Dtos.ReservationDtos;
 
-public class Reservation
+public class CreateReservationDto
 {
-    public int ReservationId { get; set; }
     public string NameSurname { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
@@ -12,5 +11,5 @@ public class Reservation
     public TimeSpan ReservationHour { get; set; }
     public int PersonCount { get; set; }
     public string Message { get; set; }
-    public ReservationType ReservationStatus { get; set; }
+    public StatusType ReservationStatus { get; set; }
 }
