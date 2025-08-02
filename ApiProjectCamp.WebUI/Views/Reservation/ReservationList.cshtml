@@ -38,7 +38,18 @@
                                     count++;
                                     <tr>
                                         <th scope="row">@count</th>
-                                        <td>@item.ReservationStatus.ToString()</td>
+                                        <td>
+                                            @*
+                                                (Dictionary<int, string>) => ViewBag dynamic olduğu için tipi açıkça Dictionary<int, string> olarak cast eder
+
+                                                GetValueOrDefault(key, defaultValue) => Dictionary'de key varsa value'sunu döner, yoksa defaultValue döner
+
+                                                - key: (int)item.ReservationStatus -> Enum'u int'e çevirir, örneğin ReservationType.Pending => 2
+
+                                                - defaultValue: item.ReservationStatus.ToString() -> Dictionary'de karşılık bulunmazsa enum'un kendisini string olarak gösterir, örneğin "Pending"
+                                            *@
+                                            @(((Dictionary<int, string>)ViewBag.reservationType).GetValueOrDefault((int)item.ReservationStatus, item.ReservationStatus.ToString()))
+                                        </td>
                                         <td>@item.NameSurname</td>
                                         <td>@item.PhoneNumber</td>
                                         <td>@item.ReservationDate.ToString("dd.MM.yyyy") | @item.ReservationHour.ToString(@"hh\:mm")</td>

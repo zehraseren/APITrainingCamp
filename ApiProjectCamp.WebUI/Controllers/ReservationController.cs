@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
 using ApiProjectCamp.WebUI.Dtos.ReservationDtos;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace ApiProjectCamp.WebUI.Controllers;
 
@@ -15,8 +14,20 @@ public class ReservationController : Controller
         _httpClientFactory = httpClientFactory;
     }
 
+    private Dictionary<int, string> GetReservationTypeDictionary()
+    {
+        return new Dictionary<int, string>
+        {
+            { 1, "Onaylandı" },
+            { 2, "Beklemede" },
+            { 3, "Reddedildi" }
+        };
+    }
+
     public async Task<IActionResult> ReservationList()
     {
+        ViewBag.reservationType = GetReservationTypeDictionary();
+
         var client = _httpClientFactory.CreateClient();
         var response = await client.GetAsync("https://localhost:44392/api/Reservations");
         if (response.IsSuccessStatusCode)
@@ -37,21 +48,8 @@ public class ReservationController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateReservation(CreateReservationDto crdto)
     {
-        DateTime reservationDateTime = crdto.ReservationDate + crdto.ReservationHour;
-
-        var apiPayload = new
-        {
-            nameSurname= crdto.NameSurname,
-            email = crdto.Email,
-            phoneNumber = crdto.PhoneNumber,
-            reservationDateTime = reservationDateTime,
-            personCount = crdto.PersonCount,
-            message = crdto.Message,
-            reservationStatus = crdto.ReservationStatus
-        };
-
         var client = _httpClientFactory.CreateClient();
-        var data = JsonConvert.SerializeObject(apiPayload);
+        var data = JsonConvert.SerializeObject(crdto);
         StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
         var response = await client.PostAsync("https://localhost:44392/api/Reservations", content);
         if (response.IsSuccessStatusCode)

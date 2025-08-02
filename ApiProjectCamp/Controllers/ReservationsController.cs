@@ -29,7 +29,20 @@ public class ReservationsController : ControllerBase
     [HttpPost]
     public IActionResult CreateReservation(CreateReservationDto crdto)
     {
-        var reservation = _mapper.Map<Reservation>(crdto);
+        TimeSpan reservationHour = TimeSpan.Parse(crdto.ReservationHour);
+
+        var reservation = new Reservation
+        {
+            NameSurname = crdto.NameSurname,
+            Email = crdto.Email,
+            PhoneNumber = crdto.PhoneNumber,
+            ReservationDate = crdto.ReservationDate.Date,
+            ReservationHour = reservationHour,
+            PersonCount = crdto.PersonCount,
+            Message = crdto.Message,
+            ReservationStatus = crdto.ReservationStatus
+        };
+
         _context.Reservations.Add(reservation);
         _context.SaveChanges();
         return Ok("Ekleme işlemi başarılı.");
@@ -54,7 +67,22 @@ public class ReservationsController : ControllerBase
     [HttpPut]
     public IActionResult UpdateReservation(UpdateReservationDto urdto)
     {
-        var reservation = _mapper.Map<Reservation>(urdto);
+        if (!TimeSpan.TryParse(urdto.ReservationHour, out var reservationHour))
+            return BadRequest("Geçersiz saat formatı.");
+
+        var reservation = new Reservation
+        {
+            ReservationId = urdto.ReservationId,
+            NameSurname = urdto.NameSurname,
+            Email = urdto.Email,
+            PhoneNumber = urdto.PhoneNumber,
+            ReservationDate = urdto.ReservationDate.Date,
+            ReservationHour = reservationHour,
+            PersonCount = urdto.PersonCount,
+            Message = urdto.Message,
+            ReservationStatus = urdto.ReservationStatus
+        };
+
         _context.Reservations.Update(reservation);
         _context.SaveChanges();
         return Ok("Güncelleme işlemi başarılı.");

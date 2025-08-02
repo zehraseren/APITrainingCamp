@@ -9,8 +9,8 @@ public class GetByIdReservationDto
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
     public DateTime ReservationDate { get; set; }
-    public TimeSpan ReservationHour { get; set; }
+    public string ReservationHour { get; set; }
     public int PersonCount { get; set; }
     public string Message { get; set; }
-    public StatusType ReservationStatus { get; set; }
+    public ReservationType ReservationStatus { get; set; }
 }
