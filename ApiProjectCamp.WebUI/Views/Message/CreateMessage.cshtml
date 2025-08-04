@@ -1,0 +1,38 @@
+﻿@model CreateMessageDto
+
+@{
+    ViewData["Title"] = "CreateMessage";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Yeni Mesaj Ekleme Sayfası</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <form method="post">
+                                <label>Gönderici Ad Soyad</label>
+                                <input type="text" class="form-control" asp-for="NameSurname" />
+                                <label>Mail Adresi</label>
+                                <input type="text" class="form-control" asp-for="Email" />
+                                <label>Mesaj Konusu</label>
+                                <input type="text" class="form-control" asp-for="Subject" />
+                                <label>Mesaj İçeriği</label>
+                                <input type="text" class="form-control" asp-for="MessageDetails" />
+                                <div class="d-flex justify-content-end mt-4 none-border">
+                                    <button type="submit" class="btn btn-outline-success mr-3 btn-rounded">Mesajı Oluştur</button>
+                                    <a href="/Message/MessageList/" class="btn btn-outline-danger btn-rounded mr-2">İptal</a>
+                                </div>
+                            </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
