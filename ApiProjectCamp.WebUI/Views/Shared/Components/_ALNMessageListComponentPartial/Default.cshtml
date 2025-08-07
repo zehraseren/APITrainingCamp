@@ -17,14 +17,9 @@
             @foreach (var item in Model)
             {
                 <a href="#" class="dropdown-item">
-                    <span class="dropdown-item-avatar
-                   text-white">
-                        <img alt="image" src="@item.ImageUrl" class="rounded-circle">
-                    </span> <span class="dropdown-item-desc">
-                        <span class="message-user">@item.NameSurname</span>
-                        <span class="time messege-text">@item.Subject</span>
-                        <span class="time">@item.SendDate.ToString("dd/MM/yyyy HH:mm")</span>
-                    </span>
+                    <span class="message-user">@item.NameSurname</span>
+                    <span class="time messege-text">@item.Subject</span>
+                    <span class="time">@item.SendDate.ToString("dd/MM/yyyy HH:mm")</span>
                 </a>
             }
         </div>

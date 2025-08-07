@@ -49,7 +49,7 @@ public class MessageController : Controller
     public async Task<IActionResult> DeleteMessage(int id)
     {
         var client = _httpClientFactory.CreateClient();
-        var response = await client.DeleteAsync($"https://localhost:44392/api/Messages/{id}");
+        var response = await client.DeleteAsync($"https://localhost:44392/api/Messages?id={id}");
         if (response.IsSuccessStatusCode)
         {
             return RedirectToAction("MessageList");
@@ -83,5 +83,15 @@ public class MessageController : Controller
             return RedirectToAction("MessageList");
         }
         return View();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> AnswerMessageWithOpenAI(int id)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var response = await client.GetAsync($"https://localhost:44392/api/Messages/{id}");
+        var data = await response.Content.ReadAsStringAsync();
+        var result = JsonConvert.DeserializeObject<GetMessageByIdDto>(data);
+        return View(result);
     }
 }
