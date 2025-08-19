@@ -35,10 +35,10 @@ public class MessageController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateMessage(CreateMessageDto ccdto)
+    public async Task<IActionResult> CreateMessage(CreateMessageDto cmdto)
     {
         var client = _httpClientFactory.CreateClient();
-        var data = JsonConvert.SerializeObject(ccdto);
+        var data = JsonConvert.SerializeObject(cmdto);
         StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
         var response = await client.PostAsync("https://localhost:44392/api/Messages", content);
         if (response.IsSuccessStatusCode)
@@ -149,5 +149,25 @@ public class MessageController : Controller
         }
 
         return View(result);
+    }
+
+    public PartialViewResult SendMessage()
+    {
+        return PartialView();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> SendMessage(CreateMessageDto cmdto)
+    {
+        var client = _httpClientFactory.CreateClient();
+        cmdto.SendDate = DateTime.Now;
+        var data = JsonConvert.SerializeObject(cmdto);
+        StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync("https://localhost:44392/api/Messages", content);
+        if (response.IsSuccessStatusCode)
+        {
+            return RedirectToAction("MessageList");
+        }
+        return View();
     }
 }
