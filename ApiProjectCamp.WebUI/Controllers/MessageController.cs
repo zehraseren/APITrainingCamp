@@ -183,11 +183,43 @@ public class MessageController : Controller
             {
                 var translateDoc = SystemJson.JsonDocument.Parse(translateResponseString);
                 englishText = translateDoc.RootElement[0].GetProperty("translation_text").GetString();
-                ViewBag.englishText = englishText;
+                //ViewBag.englishText = englishText;
+            }
+
+            var toxicRequestBody = new
+            {
+                inputs = englishText,
+            };
+
+            var toxicJson = SystemJson.JsonSerializer.Serialize(toxicRequestBody);
+            var toxicContent = new StringContent(toxicJson, Encoding.UTF8, "application/json");
+            var toxicResponse = await clientAI.PostAsync("https://api-inference.huggingface.co/models/unitary/toxic-bert", toxicContent);
+            var toxicResponseString = await toxicResponse.Content.ReadAsStringAsync();
+
+            if (toxicResponseString.TrimStart().StartsWith("["))
+            {
+                var toxicDoc = SystemJson.JsonDocument.Parse(toxicResponseString);
+                foreach (var item in toxicDoc.RootElement.EnumerateArray())
+                {
+                    string label = item.GetProperty("label").GetString();
+                    double score = item.GetProperty("score").GetDouble();
+
+                    if (score > 0.5)
+                    {
+                        cmdto.Status = "Toksik Mesaj";
+                        break;
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(cmdto.Status))
+            {
+                cmdto.Status = "Normal Mesaj";
             }
         }
-        catch
+        catch (Exception ex)
         {
+            cmdto.Status = "Onay bekliyor";
             throw;
         }
 
