@@ -1,8 +1,10 @@
 ﻿using System.Text;
-using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using ApiProjectCamp.WebUI.Dtos.MessageDtos;
+
+using SystemJson = System.Text.Json;
+using NewtonsoftJson = Newtonsoft.Json;
 using static ApiProjectCamp.WebUI.Controllers.AIController;
 
 namespace ApiProjectCamp.WebUI.Controllers;
@@ -22,7 +24,7 @@ public class MessageController : Controller
         if (response.IsSuccessStatusCode)
         {
             var data = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<List<ResultMessageDto>>(data);
+            var result = NewtonsoftJson.JsonConvert.DeserializeObject<List<ResultMessageDto>>(data);
             return View(result);
         }
         return View();
@@ -38,7 +40,7 @@ public class MessageController : Controller
     public async Task<IActionResult> CreateMessage(CreateMessageDto cmdto)
     {
         var client = _httpClientFactory.CreateClient();
-        var data = JsonConvert.SerializeObject(cmdto);
+        var data = NewtonsoftJson.JsonConvert.SerializeObject(cmdto);
         StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
         var response = await client.PostAsync("https://localhost:44392/api/Messages", content);
         if (response.IsSuccessStatusCode)
@@ -67,7 +69,7 @@ public class MessageController : Controller
         if (response.IsSuccessStatusCode)
         {
             var data = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<UpdateMessageDto>(data);
+            var result = NewtonsoftJson.JsonConvert.DeserializeObject<UpdateMessageDto>(data);
             return View(result);
         }
         return View();
@@ -77,7 +79,7 @@ public class MessageController : Controller
     public async Task<IActionResult> UpdateMessage(UpdateMessageDto ucdto)
     {
         var client = _httpClientFactory.CreateClient();
-        var data = JsonConvert.SerializeObject(ucdto);
+        var data = NewtonsoftJson.JsonConvert.SerializeObject(ucdto);
         StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
         var response = await client.PutAsync($"https://localhost:44392/api/Messages/", content);
         if (response.IsSuccessStatusCode)
@@ -93,7 +95,7 @@ public class MessageController : Controller
         var client = _httpClientFactory.CreateClient();
         var response = await client.GetAsync($"https://localhost:44392/api/Messages/{id}");
         var data = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<GetMessageByIdDto>(data);
+        var result = NewtonsoftJson.JsonConvert.DeserializeObject<GetMessageByIdDto>(data);
 
         // Burada projeyi kullanan kişinin, kendi OpenAI API anahtarıni girmelidir
         var apiKey = "YOUR_API_KEY_HERE";
@@ -159,9 +161,39 @@ public class MessageController : Controller
     [HttpPost]
     public async Task<IActionResult> SendMessage(CreateMessageDto cmdto)
     {
+        var clientAI = new HttpClient();
+        var apiKey = "YOUR_API_KEY_HERE";
+        clientAI.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+        try
+        {
+            var translateRequestBody = new
+            {
+                inputs = cmdto.MessageDetails,
+            };
+
+            var translateJson = SystemJson.JsonSerializer.Serialize(translateRequestBody);
+            var transelateContent = new StringContent(translateJson, Encoding.UTF8, "application/json");
+
+            var translateResponse = await clientAI.PostAsync("https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-tr-en", transelateContent);
+
+            var translateResponseString = await translateResponse.Content.ReadAsStringAsync();
+
+            string englishText = cmdto.MessageDetails;
+            if (translateResponseString.TrimStart().StartsWith("["))
+            {
+                var translateDoc = SystemJson.JsonDocument.Parse(translateResponseString);
+                englishText = translateDoc.RootElement[0].GetProperty("translation_text").GetString();
+                ViewBag.englishText = englishText;
+            }
+        }
+        catch
+        {
+            throw;
+        }
+
         var client = _httpClientFactory.CreateClient();
         cmdto.SendDate = DateTime.Now;
-        var data = JsonConvert.SerializeObject(cmdto);
+        var data = NewtonsoftJson.JsonConvert.SerializeObject(cmdto);
         StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
         var response = await client.PostAsync("https://localhost:44392/api/Messages", content);
         if (response.IsSuccessStatusCode)
